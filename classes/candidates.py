@@ -1,4 +1,5 @@
 import json
+from typing import Any, Generator
 
 
 class Candidates:
@@ -38,10 +39,14 @@ class Candidates:
         :return: строку с данными о конкретном кандидате в форматированном виде
         """
         candidates = self.load()
-        return f'<img src="{candidates[id-1]["picture"]}">\n\n' \
-               f'Имя кандидата - {candidates[id-1]["name"]}\n' \
-               f'Позиция {candidates[id-1]["position"]}\n' \
-               f'Навыки: {candidates[id-1]["skills"]}\n'
+        data_candidate = ''
+        for _ in candidates:
+            if id == _["id"]:
+                data_candidate = f'<img src="{_["picture"]}">\n\n' \
+                                 f'Имя кандидата - {_["name"]}\n' \
+                                 f'Позиция {_["position"]}\n' \
+                                 f'Навыки: {_["skills"]}\n'
+        return data_candidate
 
     def get_candidates_with_skill(self, skill):
         """
