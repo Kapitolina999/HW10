@@ -39,14 +39,12 @@ class Candidates:
         :return: строку с данными о конкретном кандидате в форматированном виде
         """
         candidates = self.load()
-        data_candidate = ''
-        for _ in candidates:
-            if id == _["id"]:
-                data_candidate = f'<img src="{_["picture"]}">\n\n' \
-                                 f'Имя кандидата - {_["name"]}\n' \
-                                 f'Позиция {_["position"]}\n' \
-                                 f'Навыки: {_["skills"]}\n'
-        return data_candidate
+        data_candidate = [f'<img src="{_["picture"]}">\n'
+                          f'Имя кандидата - {_["name"]}\n' 
+                          f'Позиция {_["position"]}\n' 
+                          f'Навыки: {_["skills"]}\n' for _ in candidates
+                          if id == _["id"]]
+        return data_candidate[0]
 
     def get_candidates_with_skill(self, skill):
         """
